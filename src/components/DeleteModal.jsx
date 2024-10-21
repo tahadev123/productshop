@@ -1,12 +1,12 @@
 import closeIcon from "../assets/images/close.png"
 
-import styles from "./DeleteModal.module.css"
+import styles from "./Modal.module.css"
 
 function DeleteModal({ setShowDeleteModal }) {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.modal}>
+        <div className={styles.deleteModal}>
           <img src={closeIcon} />
           <h4>آیا از حذف این محصول مطمئنید؟</h4>
           <div>
