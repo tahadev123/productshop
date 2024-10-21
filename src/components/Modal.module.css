@@ -54,9 +54,9 @@
     margin-right: 7px;
 }
 
-/* edit modal */
+/* edit modal & add products modal */
 
-.editModal {
+.editModal, .addModal {
     width: 460px;
     height: 475px;
     background-color: #fff;
@@ -107,7 +107,7 @@ label {
     outline: none;
 }
 
-.editBtn {
+.editBtn, .addBtn {
     width: 185px;
     height: 42px;
     border: none;
