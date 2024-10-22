@@ -8,4 +8,10 @@ const useAddProduct = () => {
   return useMutation({ mutationFn });
 };
 
-export { useAddProduct };
+const useDeleteProduct = () => {
+  const mutationFn = (data) => api.delete(`/products/${data}`)
+
+  return useMutation({ mutationFn })
+}
+
+export { useAddProduct, useDeleteProduct };

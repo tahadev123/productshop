@@ -11,6 +11,7 @@ import EditModal from "./EditModal"
 function Products() {
   const [ showDeleteModal, setShowDeleteModal ] = useState(false)
   const [ showEditModal, setShowEditModal ] = useState(false)
+  const [productId, setProductId] = useState("")
 
   const products = useProducts()
   const product = products.data?.data.data
@@ -18,7 +19,7 @@ function Products() {
   return (
     <>
       {
-        showDeleteModal ? <DeleteModal setShowDeleteModal={setShowDeleteModal} /> : null
+        showDeleteModal ? <DeleteModal productId={productId} setShowDeleteModal={setShowDeleteModal} /> : null
       }
       {
         showEditModal ? <EditModal setShowEditModal={setShowEditModal} /> : null
@@ -41,11 +42,14 @@ function Products() {
             <td>{item.price} هزار تومان</td>
             <td>{item.id}</td>
             <td>
-              <button onClick={() => setShowDeleteModal(true)} className={styles.deleteBtn}><img src={trashIcon} /></button>
+              <button onClick={() => {
+                setShowDeleteModal(true)
+                setProductId(item.id)
+              }} className={styles.deleteBtn}><img src={trashIcon} /></button>
               <button onClick={() => setShowEditModal(true)} className={styles.editBtn}><img src={editIcon} /></button>
             </td>
           </tr>
-          ))}
+        ))}
         </tbody>
       </table>
     </>
