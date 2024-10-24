@@ -2,10 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 
 import api from "../configs/api";
 
-const useProducts = () => {
-  const queryFn = () => api.get("products?page=1&limit=8");
+const useProducts = (steps) => {
+  const queryFn = () => api.get(`products?page=${steps}&limit=6`);
 
-  return useQuery({ queryKey: ["products"], queryFn });
+  return useQuery({
+    queryKey: ["products", steps],
+    queryFn,
+    keepPreviousData: true,
+  });
 };
 
 export { useProducts };

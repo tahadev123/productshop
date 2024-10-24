@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddProduct } from "../services/mutations";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Modal.module.css";
 
@@ -13,6 +14,7 @@ function AddProducts({ setAddProduct }) {
 
   const { mutate } = useAddProduct();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -32,7 +34,12 @@ function AddProducts({ setAddProduct }) {
           console.log(data);
           queryClient.invalidateQueries({ queryKey: ["products"] });
         },
-        onError: (error) => console.log(error.response.data.message),
+        onError: (error) => {
+          console.log(error.message)
+          if (error.message === "Access denied, no token provided") {
+            navigate("/login")
+          }
+        }
       }
     );
   };

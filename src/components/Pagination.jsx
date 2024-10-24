@@ -1,10 +1,6 @@
-import { useState } from "react"
-
 import styles from "./Pagination.module.css"
 
-function Pagination() {
-  const [steps, setSteps] = useState(1)
-
+function Pagination({ steps, setSteps }) {
   return (
     <>
       <div className={styles.pagination}>

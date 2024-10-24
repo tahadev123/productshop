@@ -1,22 +1,89 @@
+import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+
+import { useEditProduct } from "../services/mutations";
+
 import styles from "./Modal.module.css"
 
-function EditModal({ setShowEditModal }) {
+function EditModal({ productId, setShowEditModal }) {
+  const { mutate } = useEditProduct();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    name: "",
+    quantity: "",
+    price: "",
+  });
+
+  const editHandler = (e) => {
+    e.preventDefault()
+
+    mutate(
+      {
+        id: productId,
+        ...form
+      },
+      {
+        onSuccess: (data) => {
+          console.log(data)
+          setShowEditModal(false)
+          queryClient.invalidateQueries({ queryKey: ["products"] })
+        },
+        onError: (error) => {
+          console.log(error.message)
+          if (error.message === "Access denied, no token provided") {
+            navigate("/login")
+          }
+        }
+      }
+    )
+  }
+
+  const changeHandler = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setForm({ ...form, [name]: value });
+  }
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.editModal}>
           <div>
             <h3 className={styles.titleModal}>ویرایش اطلاعات</h3>
-            <div className={styles.inputs}>
+            <form onSubmit={editHandler}>
+              <div className={styles.inputs}>
                 <label htmlFor="name">نام کالا</label>
-                <input className={styles.input} type="text" id="name" name="name" />
-                <label htmlFor="inventory">تعداد موجودی</label>
-                <input className={styles.input} type="text" id="inventory" name="inventory" />
-                <label htmlFor="">قیمت</label>
-                <input className={styles.input} type="text" id="price" name="price" />
-            </div>
-            <button onClick={() => setShowEditModal(false)} className={styles.cancelEditBtn}>انصراف</button>
-            <button className={styles.editBtn}>ثبت اطلاعات جدید</button>
+                <input
+                  className={styles.input}
+                  type="text"
+                  id="name"
+                  name="name"
+                  onChange={changeHandler}
+                />
+                <label htmlFor="quantity">تعداد موجودی</label>
+                <input
+                  className={styles.input}
+                  type="text"
+                  id="quantity"
+                  name="quantity"
+                  onChange={changeHandler}
+                />
+                <label htmlFor="price">قیمت</label>
+                <input
+                  className={styles.input}
+                  type="text"
+                  id="price"
+                  name="price"
+                  onChange={changeHandler}
+                />
+              </div>
+              <button onClick={() => setShowEditModal(false)} className={styles.cancelEditBtn}>انصراف</button>
+              <button type="submit" className={styles.editBtn}>ثبت اطلاعات جدید</button>
+            </form>
           </div>
         </div>
       </div>

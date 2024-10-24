@@ -1,12 +1,14 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useDeleteProduct } from "../services/mutations"
+import { useNavigate } from "react-router-dom";
 
 import closeIcon from "../assets/images/close.png"
 import styles from "./Modal.module.css"
 
-function DeleteModal({ productId ,setShowDeleteModal }) {
+function DeleteModal({ productId, setShowDeleteModal }) {
   const { mutate } = useDeleteProduct();
-  const queryClient = useQueryClient();  
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const deleteHandler = () => {
     mutate(
@@ -18,7 +20,10 @@ function DeleteModal({ productId ,setShowDeleteModal }) {
           queryClient.invalidateQueries({ queryKey: ["products"] })
         },
         onError: (error) => {
-          console.log(error.message);
+          console.log(error.message)
+          if (error.message === "Access denied, no token provided") {
+            navigate("/login")
+          }
         }
       }
     )
