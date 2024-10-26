@@ -9,27 +9,33 @@ const useAddProduct = () => {
 };
 
 const useDeleteProduct = () => {
-  const mutationFn = (id) => api.delete(`/products/${id}`)
+  const mutationFn = (id) => api.delete(`/products/${id}`);
 
-  return useMutation({ mutationFn })
+  return useMutation({ mutationFn });
 };
 
 const useEditProduct = () => {
-  const mutationFn = (data) => api.put(`/products/${data.id}`, data)
+  const mutationFn = (data) => api.put(`/products/${data.id}`, data);
 
-  return useMutation({ mutationFn })
-}
+  return useMutation({ mutationFn });
+};
 
 const useRegister = () => {
-  const mutationFn = (data) => api.post("/auth/register", data)
+  const mutationFn = (data) => api.post("/auth/register", data);
 
-  return useMutation({ mutationFn })
-}
+  return useMutation({ mutationFn });
+};
 
 const useLogin = () => {
-  const mutationFn = (data) => api.post("/auth/login", data)
+  const mutationFn = (data) => api.post("/auth/login", data);
 
-  return useMutation({ mutationFn })
-}
+  return useMutation({ mutationFn });
+};
 
-export { useAddProduct, useDeleteProduct, useEditProduct, useRegister, useLogin };
+export {
+  useAddProduct,
+  useDeleteProduct,
+  useEditProduct,
+  useRegister,
+  useLogin,
+};

@@ -14,9 +14,7 @@ function Products({ steps }) {
   const [productId, setProductId] = useState("")
   
   const products = useProducts(steps)
-  const product = products.data?.data.data
-  console.log(product);
-    
+  let product = products.data?.data.data
   
   return (
     <>
@@ -37,24 +35,24 @@ function Products({ steps }) {
             </tr>
         </thead>
         <tbody>
-        {product?.map((item) => (
-          <tr key={item.id}>
-            <td>{item.name}</td>
-            <td>{item.quantity}</td>
-            <td>{Number(item.price).toLocaleString()} {item.price > 1000000 ? "میلیون تومان" : "هزار تومان"}</td>
-            <td>{item.id}</td>
-            <td>
-              <button onClick={() => {
-                setShowDeleteModal(true)
-                setProductId(item.id)
-              }} className={styles.deleteBtn}><img src={trashIcon} /></button>
-              <button onClick={() => {
-                setShowEditModal(true)
-                setProductId(item.id)
-              }} className={styles.editBtn}><img src={editIcon} /></button>
-            </td>
-          </tr>
-        ))}
+          {product?.map((item) => (
+            <tr key={item.id}>
+              <td>{item.name}</td>
+              <td>{item.quantity}</td>
+              <td>{Number(item.price).toLocaleString()} {item.price > 1000000 ? "میلیون تومان" : "هزار تومان"}</td>
+              <td>{item.id}</td>
+              <td>
+                <button onClick={() => {
+                  setShowDeleteModal(true)
+                  setProductId(item.id)
+                }} className={styles.deleteBtn}><img src={trashIcon} /></button>
+                <button onClick={() => {
+                  setShowEditModal(true)
+                  setProductId(item.id)
+                }} className={styles.editBtn}><img src={editIcon} /></button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

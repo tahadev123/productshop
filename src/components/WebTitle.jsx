@@ -19,7 +19,7 @@ function WebTitle() {
           <h3>مدیریت کالا</h3>
         </div>
         <div>
-          <button onClick={() => setAddProduct(true)}>افزودن محصول</button>
+          <button className={styles.addProductBtn} onClick={() => setAddProduct(true)}>افزودن محصول</button>
         </div>
       </div>
     </>

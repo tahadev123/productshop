@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 import { useLogin } from "../services/mutations"
 
@@ -16,7 +16,6 @@ function LoginPage() {
 
   const { username, password } = form
   const { mutate } = useLogin()
-  const navigate = useNavigate()
 
   const changeHandler = (e) => {
     const name = e.target.name

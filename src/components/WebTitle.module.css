@@ -20,7 +20,7 @@
     color: #282828;
 }
 
-.container button {
+.addProductBtn {
     width: 132px;
     height: 45px;
     border-radius: 10px;
@@ -33,7 +33,7 @@
     cursor: pointer;
 }
 
-.container button:hover {
+.addProductBtn:hover {
     background-color: #325e89;
     box-shadow: #55A3F0 0 0 13px;
 }

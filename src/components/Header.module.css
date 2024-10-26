@@ -44,7 +44,7 @@
     flex-wrap: wrap;
 }
 
-.profile img {
+.profileImg {
     width: 46px;
     height: 46px;
     border-radius: 50%;
@@ -62,4 +62,43 @@
     font-weight: bold;
     margin-top: 5px;
     font-size: 16px;
+}
+
+.removeUser {
+    width: 21px;
+    position: relative;
+    top: -23px;
+    right: -15px;
+    cursor: pointer;
+}
+
+@media (max-width: 1300px) {
+    .profile {
+        width: 18%;
+    }
+
+    .searchBox {
+        width: 82%;
+    }
+}
+
+@media (max-width: 1130px) {
+    .profile {
+        width: 24%;
+    }
+
+    .searchBox {
+        width: 76%;
+    }
+}
+
+@media (max-width: 950px) {
+    .profile {
+        display: none;
+    }
+
+    .searchBox {
+        width: 100%;
+        border: none;
+    }
 }
